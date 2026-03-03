@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ponte Bella Wuarmi | Links</title>
+    <title>Ponte Bella Wuarmi</title>
     <!-- Use a modern sans-serif font -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- FontAwesome para iconos de redes y estándar -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --dark-bg: #000000;
-            --accent-turquoise: #00a19b;
-            --accent-turquoise-hover: #00a19b;
-            --accent-turquoise-light: rgba(0, 161, 155, 0.15);
-            --text-main: #fcfcfc;
+            --dark-bg: #f8d7e4;
+            --accent-turquoise: #d4af37;
+            --accent-turquoise-hover: #ff00b3;
+            --accent-turquoise-light: rgba(0, 0, 0, 0.15);
+            --text-main: #4a0e1c;
             --text-muted: #c8cccd;
-            --btn-bg: #231f20;
+            --btn-bg: #e91e63;
             --btn-hover: #566065;
         }
 
@@ -29,7 +29,7 @@
         }
 
         body {
-            background-color: var(--dark-bg);
+            background: radial-gradient(circle at top, #fdf2f5 0%, #f8d7e4 100%);
             color: var(--text-main);
             min-height: 100vh;
             padding: 2.5rem 1.5rem;
@@ -48,7 +48,7 @@
             width: 500px;
             height: 500px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 161, 155, 0.15) 0%, transparent 60%);
+            background: radial-gradient(circle, rgba(233, 30, 99, 0.15) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
             /* Por detrás de los botones pero delante del fondo negro */
@@ -347,8 +347,8 @@
             <div class="logo-placeholder" id="logo-container">
                 <img id="logo-img" style="display: none;" src="" alt="Logo">
             </div>
-            <h1 class="brand-title" id="page-title">MC Motors</h1>
-            <p class="brand-subtitle" id="page-subtitle">Servicios Automotrices</p>
+            <h1 class="brand-title" id="page-title">Ponte Bella Wuarmi</h1>
+            <p class="brand-subtitle" id="page-subtitle">Donde la belleza encuentra su estilo</p>
         </header>
 
         <!-- Contenedor Dinámico de Redes Sociales (Fila) -->
@@ -362,7 +362,7 @@
         </nav>
 
         <footer class="footer">
-            <span id="footer-text">&copy; 2026 MC Motors</span>
+            <span id="footer-text">&copy; 2026 Ponte Bella Wuarmi</span>
             <span id="footer-credit"></span>
             <a href="login.html" class="admin-link" title="Admin">
                 <svg viewBox="0 0 24 24">
@@ -418,19 +418,20 @@
         // Lógica de Renderizado del JSON
         document.addEventListener('DOMContentLoaded', async () => {
             const defaultData = {
-                titulo: "MC Motors",
-                subtitulo: "Servicios Automotrices",
+                titulo: "Ponte Bella Wuarmi",
+                subtitulo: "Donde la belleza encuentra su estilo",
                 tamanos: { tituloSize: 28, subtituloSize: 14, btnSize: 16, iconSize: 24 },
-                estetica: { color: "#00a19b", foto: "" },
+                estetica: { color: "#d4af37", foto: "" },
                 sociales: [ // Ya es un array dinámico
-                    { id: "soc-1", tipo: "instagram", url: "https://instagram.com/mcmotors", icono: "fa-brands fa-instagram" },
-                    { id: "soc-2", tipo: "facebook", url: "https://facebook.com/mcmotors", icono: "fa-brands fa-facebook-f" },
-                    { id: "soc-3", tipo: "tiktok", url: "https://tiktok.com/@mcmotors", icono: "fa-brands fa-tiktok" }
+                    { id: "soc-1", tipo: "instagram", url: "https://www.instagram.com/pontebellawuarmi?igsh=cDhicHM4OWxhb2F4&utm_source=qr", icono: "fa-brands fa-instagram" },
+                    { id: "soc-2", tipo: "facebook", url: "https://facebook.com/pontebellawuarmi", icono: "fa-brands fa-facebook-f" },
+                    { id: "soc-3", tipo: "tiktok", url: "https://www.tiktok.com/@ponte.bella.wuarm?_r=1&_t=ZS-94MWH3FZCbf", icono: "fa-brands fa-tiktok" }
                 ],
                 curriculum: { texto: "Perfil Profesional", url: "#", archivo: "" }, // Archivo en b64 nuevo
                 botones: [
-                    { id: "btn-1", texto: "Agendar Cita", url: "https://wa.me/593980703270", icono: "fa-brands fa-whatsapp" },
-                    { id: "btn-2", texto: "Nuestra Ubicación", url: "https://maps.app.goo.gl/69d6rmpJYoe81Kmo9", icono: "fa-solid fa-location-dot" }
+                    { id: "btn-1", texto: "Agendar Cita (WhatsApp 1)", url: "https://wa.me/593991720341", icono: "fa-brands fa-whatsapp" },
+                    { id: "btn-2", texto: "Agendar Cita (WhatsApp 2)", url: "https://wa.me/593987302219", icono: "fa-brands fa-whatsapp" },
+                    { id: "btn-3", texto: "Local 146 - El Arenal", url: "https://maps.app.goo.gl/tWp1uYv6yY5N6Yv7A", icono: "fa-solid fa-location-dot" }
                 ]
             };
 
@@ -456,8 +457,8 @@
             const titleEl = document.getElementById('page-title');
             const subtitleEl = document.getElementById('page-subtitle');
 
-            titleEl.innerText = data.titulo || "MC Motors";
-            subtitleEl.innerText = data.subtitulo || "Servicios Automotrices";
+            titleEl.innerText = data.titulo || "Ponte Bella Wuarmi";
+            subtitleEl.innerText = data.subtitulo || "Donde la belleza encuentra su estilo";
 
             titleEl.style.fontSize = `${data.tamanos.tituloSize}px`;
             subtitleEl.style.fontSize = `${data.tamanos.subtituloSize}px`;
@@ -466,14 +467,14 @@
             const footerTextEl = document.getElementById('footer-text');
             const footerCreditEl = document.getElementById('footer-credit');
 
-            const baseText = (data.footer && data.footer.texto !== undefined) ? data.footer.texto : `© 2026 ${data.titulo || "MC Motors"}`;
+            const baseText = (data.footer && data.footer.texto !== undefined) ? data.footer.texto : `© 2026 ${data.titulo || "Ponte Bella Wuarmi"}`;
             footerTextEl.innerText = baseText;
 
             if (data.footer && data.footer.credito && data.footer.url) {
                 footerCreditEl.innerHTML = `<a href="${data.footer.url}" target="_blank" rel="noopener noreferrer" class="credit-link">${data.footer.credito}</a>`;
             } else if (!data.footer) {
                 // Fallback a defecto si no existe el bloque en versiones viejas
-                footerCreditEl.innerHTML = `<a href="https://wa.me/593984083776?text=Hola%20T_LEVA,%20vi%20tu%20trabajo%20en%20el%20sitio%20de%20MC%20Motors." target="_blank" rel="noopener noreferrer" class="credit-link">diseño T_LEVA</a>`;
+                footerCreditEl.innerHTML = `<a href="https://wa.me/593984083776?text=Hola%20T_LEVA,%20vi%20tu%20trabajo%20en%20el%20sitio%20de%20Ponte%20Bella%20Wuarmi." target="_blank" rel="noopener noreferrer" class="credit-link">diseño T_LEVA</a>`;
             } else {
                 footerCreditEl.innerHTML = ''; // Si lo borraron explícitamente en Dashboard
             }
@@ -527,7 +528,7 @@
 
                 // If it is base64 file, add a download attribute
                 if (cvA.href.startsWith('data:')) {
-                    cvA.download = "Curriculum_MC_Motors.pdf";
+                    cvA.download = "Curriculum_Ponte_Bella_Wuarmi.pdf";
                 } else {
                     cvA.target = "_blank";
                     cvA.rel = "noopener noreferrer";

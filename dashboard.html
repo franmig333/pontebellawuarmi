@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Motors | Panel de Control Dinámico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #c8cccd;
+            --btn-bg: #231f20;
+            --btn-hover: #566065;
+            --accent: #00a19b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--btn-hover);
+            padding-bottom: 1rem;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .logout-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .section {
+            background: var(--btn-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--btn-hover);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        input[type="url"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--btn-hover);
+            background: var(--bg-color);
+            color: white;
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        select {
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px dashed var(--btn-hover);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button {
+            background: var(--btn-hover);
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        div.color-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            cursor: pointer;
+            background: transparent;
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border: none;
+            border-radius: 6px;
+        }
+
+        /* Contenedores Flex (Para agrupar campos con sliders) */
+        .flex-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+        /* Sliders / Range Inputs style */
+        .range-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            cursor: pointer;
+            accent-color: var(--accent);
+        }
+
+        .range-value {
+            background: var(--bg-color);
+            border: 1px solid var(--btn-hover);
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            min-width: 48px;
+            text-align: center;
+        }
+
+        /* Tarjetas dinámicas (Botones y Redes) */
+        .dynamic-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--btn-hover);
+            position: relative;
+        }
+
+        .card .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .add-btn {
+            background: var(--btn-hover);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .add-btn:hover {
+            background: var(--accent);
+        }
+
+        .actions {
+            margin-top: 2rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        button.save-btn {
+            background: var(--accent);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            transition: opacity 0.3s;
+        }
+
+        button.save-btn:hover {
+            opacity: 0.9;
+        }
+
+        a.back-btn {
+            background: var(--btn-hover);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Loading Overlay for file uploads */
+        #loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-size: 1.2rem;
+        }
+
+        .sortable-ghost {
+            opacity: 0.4;
+            background-color: var(--btn-hover);
+            border: 1px dashed var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Panel de Control</h1>
+            <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+        </div>
+
+        <form id="dashboard-form">
+            <!-- Sección Textos Principales y Tamaños -->
+            <div class="section">
+                <h2>Textos y Tipografía Base</h2>
+
+                <div class="form-group flex-row">
+                    <div class="flex-1">
+                        <label>Título Principal</label>
+                        <input type="text" id="mainTitle" required>
+                    </div>
+                    <div style="width: 140px;">
+                        <label>Tamaño (px)</label>
+                        <div class="range-container">
+                            <input type="range" id="titleSize" min="16" max="42" value="28"
+                                oninput="updateRangeLabel('titleSizeVal', this.value)">
+                            <span class="range-value" id="titleSizeVal">28px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group flex-row">
+                    <div class="flex-1">
+                        <label>Subtítulo / Eslogan</label>
+                        <input type="text" id="mainSubtitle" required>
+                    </div>
+                    <div style="width: 140px;">
+                        <label>Tamaño (px)</label>
+                        <div class="range-container">
+                            <input type="range" id="subSize" min="10" max="24" value="14"
+                                oninput="updateRangeLabel('subSizeVal', this.value)">
+                            <span class="range-value" id="subSizeVal">14px</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Estética y Logo Modal -->
+            <div class="section">
+                <h2>Diseño y Foto de Perfil</h2>
+
+                <!-- FILE READER LOGO INPUT -->
+                <div class="form-group">
+                    <label>Subir Logo desde tu dispositivo (Foto JPG/PNG)</label>
+                    <input type="file" id="logoUpload" accept="image/*">
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:5px;">Esta imagen se procesará y
+                        quedará guardada de forma segura.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>O colocar URL directa de imagen externa (opcional)</label>
+                    <input type="url" id="logoUrl" placeholder="https://ejemplo.com/logo.jpg">
+                </div>
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label>Color de Acento (Bordes e interacciones)</label>
+                    <div class="color-picker">
+                        <input type="color" id="accentColor">
+                        <span id="color-hex">#00a19b</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección Redes Sociales Dinámicas -->
+            <div class="section">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <h2>Iconos Sociales (Fila horizontal)</h2>
+                    <div style="width: 120px;">
+                        <div class="range-container">
+                            <input type="range" id="iconSize" min="16" max="42" value="24"
+                                oninput="updateRangeLabel('iconSizeVal', this.value)">
+                            <span class="range-value" id="iconSizeVal">24px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sociales-container" class="dynamic-list"></div>
+                <button type="button" class="add-btn" onclick="agregarSocial()">+ Añadir Otra Red Social</button>
+            </div>
+
+            <!-- Sección Currículum / Perfil Destacado (FileReader) -->
+            <div class="section">
+                <h2>Perfil Profesional / Currículum</h2>
+                <div class="form-group">
+                    <label>Texto del botón</label>
+                    <input type="text" id="cvText" placeholder="Ej: Perfil Profesional">
+                </div>
+
+                <div class="form-group">
+                    <label>Subir tu CV (Archivo PDF) directo</label>
+                    <input type="file" id="cvUpload" accept="application/pdf">
+                </div>
+
+                <div class="form-group">
+                    <label>O añadir un Link de un servicio externo (Google Drive/LinkedIn)</label>
+                    <input type="url" id="cvUrl" placeholder="Si dejas todos vacíos, el botón desaparecerá">
+                </div>
+            </div>
+
+            <!-- Sección Gestión de Botones Genéricos -->
+            <div class="section">
+                <h2>Botones (Verticales)</h2>
+
+                <div class="form-group" style="max-width: 250px;">
+                    <label>Tamaño Letra Botones (px)</label>
+                    <div class="range-container">
+                        <input type="range" id="btnSize" min="12" max="24" value="16"
+                            oninput="updateRangeLabel('btnSizeVal', this.value)">
+                        <span class="range-value" id="btnSizeVal">16px</span>
+                    </div>
+                </div>
+
+                <div id="botones-container" class="dynamic-list"></div>
+                <button type="button" class="add-btn" onclick="agregarBoton()">+ Añadir Botón de Enlace</button>
+            </div>
+
+            <!-- Sección Pie de Página / Créditos -->
+            <div class="section">
+                <h2>Pie de Página (Footer)</h2>
+
+                <div class="form-group flex-row">
+                    <div class="flex-1">
+                        <label>Texto Principal del Footer</label>
+                        <input type="text" id="footerText" placeholder="Ej: MC Motors 2026." required>
+                    </div>
+                    <div class="flex-1">
+                        <label>Crédito / Agencia</label>
+                        <input type="text" id="footerCredit" placeholder="Ej: diseño T_LEVA">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Enlace del Crédito (URL Whatsapp/Web)</label>
+                    <input type="url" id="footerUrl" placeholder="https://wa.me/..." required>
+                </div>
+            </div>
+
+            <div class="actions">
+                <a href="index.html" class="back-btn">Ver sitio</a>
+                <button type="submit" class="save-btn">Guardar Todo Completo</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="toast" class="toast" style="text-align:center;">Datos guardados. La página se actualizará en
+        aproximadamente 1 minuto.</div>
+
+    <!-- Overlay process loader -->
+    <div id="loading-overlay">
+        <i class="fa-solid fa-circle-notch fa-spin"
+            style="font-size: 3rem; margin-bottom: 1rem; color:var(--accent);"></i>
+        <div>Guardando datos vía Netlify...</div>
+    </div>
+
+    <script>
+        // Check Auth
+        if (sessionStorage.getItem('is_admin') !== 'true') { window.location.href = 'login.html'; }
+
+        function updateRangeLabel(id, val) { document.getElementById(id).textContent = val + 'px'; }
+        const colorInput = document.getElementById('accentColor');
+        const colorHex = document.getElementById('color-hex');
+        colorInput.addEventListener('input', (e) => { colorHex.textContent = e.target.value; });
+
+        // Storage Base64 Placeholders to prevent fetching files every form render
+        let logoBase64Data = "";
+        let cvBase64Data = "";
+
+        // Default Data Structure v3
+        const defaultData = {
+            titulo: "MC Motors",
+            subtitulo: "Servicios Automotrices",
+            tamanos: { tituloSize: 28, subtituloSize: 14, btnSize: 16, iconSize: 24 },
+            estetica: { color: "#00a19b", foto: "" },
+            sociales: [
+                { id: "soc-1", tipo: "instagram", url: "https://instagram.com/mcmotors", icono: "fa-brands fa-instagram" },
+                { id: "soc-2", tipo: "facebook", url: "https://facebook.com/mcmotors", icono: "fa-brands fa-facebook-f" },
+                { id: "soc-3", tipo: "tiktok", url: "https://tiktok.com/@mcmotors", icono: "fa-brands fa-tiktok" }
+            ],
+            curriculum: { texto: "Perfil Profesional", url: "", archivo: "" },
+            botones: [
+                { id: "btn-1", texto: "Agendar Cita", url: "https://wa.me/593980703270", icono: "fa-brands fa-whatsapp" },
+                { id: "btn-2", texto: "Nuestra Ubicación", url: "https://maps.app.goo.gl/69d6rmpJYoe81Kmo9", icono: "fa-solid fa-location-dot" }
+            ],
+            footer: {
+                texto: "MC Motors 2026.",
+                credito: "diseño T_LEVA",
+                url: "https://wa.me/593984083776?text=Hola%20T_LEVA,%20vi%20tu%20trabajo%20en%20el%20sitio%20de%20MC%20Motors."
+            }
+        };
+
+        // Icon Map Helpers
+        const iconClasses = {
+            "instagram": "fa-brands fa-instagram",
+            "facebook": "fa-brands fa-facebook-f",
+            "tiktok": "fa-brands fa-tiktok",
+            "twitter": "fa-brands fa-x-twitter",
+            "youtube": "fa-brands fa-youtube",
+            "linkedin": "fa-brands fa-linkedin-in",
+            "whatsapp": "fa-brands fa-whatsapp",
+            "web": "fa-solid fa-globe"
+        };
+
+        // DOM Initializer
+        document.addEventListener('DOMContentLoaded', async () => {
+            let data = null;
+            try {
+                const response = await fetch('data.json?t=' + new Date().getTime());
+                if (response.ok) {
+                    data = await response.json();
+                }
+            } catch (e) { console.error('Error fetching data.json', e); }
+
+            if (!data) {
+                try { const stored = localStorage.getItem('mc_motors_dynamic_v3'); if (stored) data = JSON.parse(stored); } catch (e) { }
+            }
+            if (!data) {
+                const v2 = localStorage.getItem('mc_motors_dynamic_v2');
+                if (v2) { try { data = JSON.parse(v2); } catch (e) { data = defaultData; } } else { data = defaultData; }
+            }
+            if (!data.tamanos) { data.tamanos = defaultData.tamanos; }
+
+            // Re-hydrate text inputs
+            document.getElementById('mainTitle').value = data.titulo || "";
+            document.getElementById('titleSize').value = data.tamanos.tituloSize;
+            updateRangeLabel('titleSizeVal', data.tamanos.tituloSize);
+
+            document.getElementById('mainSubtitle').value = data.subtitulo || "";
+            document.getElementById('subSize').value = data.tamanos.subtituloSize;
+            updateRangeLabel('subSizeVal', data.tamanos.subtituloSize);
+
+            document.getElementById('btnSize').value = data.tamanos.btnSize;
+            updateRangeLabel('btnSizeVal', data.tamanos.btnSize);
+
+            document.getElementById('iconSize').value = data.tamanos.iconSize;
+            updateRangeLabel('iconSizeVal', data.tamanos.iconSize);
+
+            if (data.estetica) {
+                // If the stored foto is base64, we don't display it in the URL field as it freezes the UI,
+                // we keep it entirely in memory unless strictly required.
+                if (data.estetica.foto && data.estetica.foto.startsWith('http')) {
+                    document.getElementById('logoUrl').value = data.estetica.foto;
+                } else if (data.estetica.foto && data.estetica.foto.startsWith('data:')) {
+                    logoBase64Data = data.estetica.foto;
+                }
+
+                document.getElementById('accentColor').value = data.estetica.color || "#00a19b";
+                colorHex.textContent = data.estetica.color || "#00a19b";
+            }
+
+            // Redes - DOM Dynamic Building
+            if (data.sociales && Array.isArray(data.sociales)) {
+                data.sociales.forEach(s => agregarSocialDOM(s.id, s.tipo, s.url));
+            } else { defaultData.sociales.forEach(s => agregarSocialDOM(s.id, s.tipo, s.url)); }
+
+            // CV
+            if (data.curriculum) {
+                document.getElementById('cvText').value = data.curriculum.texto || "";
+                document.getElementById('cvUrl').value = data.curriculum.url || "";
+
+                // Keep base64 CV string in memory implicitly
+                if (data.curriculum.archivo && data.curriculum.archivo.startsWith('data:')) {
+                    cvBase64Data = data.curriculum.archivo;
+                }
+            }
+
+            // Botones iterables
+            if (data.botones && Array.isArray(data.botones)) {
+                data.botones.forEach(btn => agregarBotonDOM(btn.id || 'btn-' + Math.random(), btn.texto, btn.url, btn.icono));
+            } else {
+                defaultData.botones.forEach(btn => agregarBotonDOM(btn.id, btn.texto, btn.url, btn.icono));
+            }
+
+            // Footer
+            if (data.footer) {
+                document.getElementById('footerText').value = data.footer.texto || "";
+                document.getElementById('footerCredit').value = data.footer.credito || "";
+                document.getElementById('footerUrl').value = data.footer.url || "";
+            } else {
+                document.getElementById('footerText').value = defaultData.footer.texto;
+                document.getElementById('footerCredit').value = defaultData.footer.credito;
+                document.getElementById('footerUrl').value = defaultData.footer.url;
+            }
+
+            // Inicializar Sortable para botones
+            const el = document.getElementById('botones-container');
+            if (el && typeof Sortable !== 'undefined') {
+                Sortable.create(el, {
+                    handle: '.cursor-move',
+                    animation: 150,
+                    ghostClass: 'sortable-ghost'
+                });
+            }
+        });
+
+        /* --- REDES SOCIALES MANAGERS --- */
+        const socialesContainer = document.getElementById('sociales-container');
+        function agregarSocial() { agregarSocialDOM('soc-' + Date.now(), "instagram", ""); }
+
+        function agregarSocialDOM(id, tipoSeleccionado, url) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.id = id;
+
+            // Generador de opciones select
+            const tipos = Object.keys(iconClasses);
+            let optionsHTML = "";
+            tipos.forEach(t => {
+                const selected = t === tipoSeleccionado ? "selected" : "";
+                optionsHTML += `<option value="${t}" ${selected}>${t.charAt(0).toUpperCase() + t.slice(1)}</option>`;
+            });
+
+            card.innerHTML = `
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Eliminar</button>
+                <div class="form-group flex-row" style="margin-bottom:0px;">
+                    <div style="width: 130px;">
+                        <label>Red Social</label>
+                        <select class="soc-type-sel">${optionsHTML}</select>
+                    </div>
+                    <div class="flex-1">
+                        <label>URL / Enlace</label>
+                        <input type="url" class="soc-url-input" value="${url}" placeholder="https://..." required>
+                    </div>
+                </div>
+            `;
+            socialesContainer.appendChild(card);
+        }
+
+        /* --- BOTONES VERTICALES MANAGERS --- */
+        const botonesContainer = document.getElementById('botones-container');
+        function agregarBoton() { agregarBotonDOM('btn-' + Date.now(), "Nuevo Enlace", "", "fa-solid fa-arrow-up-right-from-square"); }
+
+        function agregarBotonDOM(id, texto, url, icono) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.id = id;
+            card.dataset.icono = icono || 'fa-solid fa-arrow-up-right-from-square';
+
+            card.innerHTML = `
+                <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Eliminar</button>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <div style="cursor: move; padding: 10px;" class="cursor-move" title="Arrastrar para reordenar">
+                        <i class="fa-solid fa-grip-vertical text-neutral-600" style="color: #566065; font-size: 1.5rem;"></i>
+                    </div>
+                    <div style="flex: 1;">
+                        <div class="form-group">
+                            <label>Texto a mostrar (Editable)</label>
+                            <input type="text" class="btn-text-input" value="${texto}" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label>URL de destino</label>
+                            <input type="url" class="btn-url-input" value="${url}" placeholder="https://..." required>
+                        </div>
+                    </div>
+                </div>
+            `;
+            botonesContainer.appendChild(card);
+        }
+
+        /* --- FILE READER ASYNC FUNCTION UTILS --- */
+        function readFileAsBase64(fileInput) {
+            return new Promise((resolve, reject) => {
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => resolve(e.target.result);
+                    reader.onerror = (e) => reject("Error leyendo el archivo");
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    resolve(null); // No file injected
+                }
+            });
+        }
+
+        /* --- GLOBAL SUBMIT PIPELINE --- */
+        document.getElementById('dashboard-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Start blocking overlay
+            const ov = document.getElementById('loading-overlay');
+            ov.style.display = 'flex';
+
+            try {
+                // Async resolve files natively with fallback logic
+                const newLogoB64 = await readFileAsBase64(document.getElementById('logoUpload'));
+                const newCvB64 = await readFileAsBase64(document.getElementById('cvUpload'));
+
+                // Prioritize text urls over Base64 if url inputs are explicitly filled,
+                // But normally we keep B64 if uploaded now, OR fall back to old B64 from memory.
+                let finalLogoValue = "";
+                const userLogoUrlValue = document.getElementById('logoUrl').value;
+                if (userLogoUrlValue.trim() !== '') {
+                    finalLogoValue = userLogoUrlValue;
+                } else if (newLogoB64) {
+                    finalLogoValue = newLogoB64;
+                } else if (logoBase64Data) {
+                    finalLogoValue = logoBase64Data;
+                }
+
+                let finalCvFileValue = "";
+                if (newCvB64) {
+                    finalCvFileValue = newCvB64;
+                } else if (cvBase64Data) {
+                    finalCvFileValue = cvBase64Data;
+                }
+
+                // Recopilar redes dinámicas extraídas del DOM
+                const socialesArray = [];
+                document.querySelectorAll('#sociales-container .card').forEach(card => {
+                    const tipoKey = card.querySelector('.soc-type-sel').value;
+                    socialesArray.push({
+                        id: card.dataset.id,
+                        tipo: tipoKey,
+                        icono: iconClasses[tipoKey] || "fa-solid fa-link",
+                        url: card.querySelector('.soc-url-input').value
+                    });
+                });
+
+                // Recopilar botones verticales extraídos del DOM
+                const botonesArray = [];
+                document.querySelectorAll('#botones-container .card').forEach(card => {
+                    botonesArray.push({
+                        id: card.dataset.id,
+                        icono: card.dataset.icono,
+                        texto: card.querySelector('.btn-text-input').value,
+                        url: card.querySelector('.btn-url-input').value
+                    });
+                });
+
+                // Object packaging
+                const configData = {
+                    titulo: document.getElementById('mainTitle').value,
+                    subtitulo: document.getElementById('mainSubtitle').value,
+                    tamanos: {
+                        tituloSize: parseInt(document.getElementById('titleSize').value),
+                        subtituloSize: parseInt(document.getElementById('subSize').value),
+                        btnSize: parseInt(document.getElementById('btnSize').value),
+                        iconSize: parseInt(document.getElementById('iconSize').value)
+                    },
+                    estetica: {
+                        color: document.getElementById('accentColor').value,
+                        foto: finalLogoValue
+                    },
+                    sociales: socialesArray,
+                    curriculum: {
+                        texto: document.getElementById('cvText').value,
+                        url: document.getElementById('cvUrl').value,
+                        archivo: finalCvFileValue
+                    },
+                    botones: botonesArray,
+                    footer: {
+                        texto: document.getElementById('footerText').value,
+                        credito: document.getElementById('footerCredit').value,
+                        url: document.getElementById('footerUrl').value
+                    }
+                };
+
+                localStorage.setItem('mc_motors_dynamic_v3', JSON.stringify(configData));
+
+                // Llamada a la Función Serverless de Netlify
+                const netlifyUrl = '/.netlify/functions/saveData';
+
+                const putRes = await fetch(netlifyUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(configData)
+                });
+
+                if (!putRes.ok) {
+                    const errorData = await putRes.json().catch(() => ({}));
+                    throw new Error(errorData.error || 'Error de la API de Netlify: ' + putRes.status);
+                }
+
+                // Local memory update just in case form is not resubmitted and page remains open
+                logoBase64Data = (finalLogoValue && finalLogoValue.startsWith('data:')) ? finalLogoValue : "";
+                cvBase64Data = (finalCvFileValue && finalCvFileValue.startsWith('data:')) ? finalCvFileValue : "";
+
+            } catch (e) {
+                console.error("Failed to commit settings: ", e);
+                alert("Hubo un error guardando: " + e.message);
+            }
+
+            // End blocking overlay
+            ov.style.display = 'none';
+
+            // Custom UI Feedback 
+            const toast = document.getElementById('toast');
+            toast.style.opacity = 1;
+            setTimeout(() => { toast.style.opacity = 0; }, 5000);
+        });
+
+        function logout() { sessionStorage.removeItem('is_admin'); window.location.href = 'index.html'; }
+    </script>
+</body>
+
+</html>

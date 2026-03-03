@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC Motors | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #c8cccd;
+            --btn-bg: #231f20;
+            --btn-hover: #566065;
+            --accent: #00a19b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-card {
+            background: var(--btn-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 320px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .login-card p {
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--btn-hover);
+            background: var(--bg-color);
+            color: white;
+            margin-bottom: 1rem;
+            outline: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 6px;
+            border: none;
+            background: var(--accent);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .error {
+            color: #ff4d4d;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-card">
+        <h2 style="color: white; margin-bottom: 5px;">Admin</h2>
+        <p>Restringido</p>
+        <form id="login-form">
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Ingresar</button>
+            <div id="error-msg" class="error">Contraseña incorrecta</div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.flagged = true; // prevent default submit tracking
+            e.preventDefault();
+            const pass = document.getElementById('password').value;
+            if (pass === 'admin') {
+                sessionStorage.setItem('is_admin', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

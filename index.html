@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponte Bella Wuarmi | Links</title>
+    <!-- Use a modern sans-serif font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos de redes y estándar -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --dark-bg: #000000;
+            --accent-turquoise: #00a19b;
+            --accent-turquoise-hover: #00a19b;
+            --accent-turquoise-light: rgba(0, 161, 155, 0.15);
+            --text-main: #fcfcfc;
+            --text-muted: #c8cccd;
+            --btn-bg: #231f20;
+            --btn-hover: #566065;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 2.5rem 1.5rem;
+            position: relative;
+            /* Necesario para ocultar overflow del cursor */
+            overflow-x: hidden;
+        }
+
+        /* 
+         * ANTIGRAVITY CURSOR FOLLOWER 
+         */
+        #cursor-follower {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 161, 155, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            /* Por detrás de los botones pero delante del fondo negro */
+            transform: translate(-50%, -50%);
+            /* Centrar respecto a x,y */
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            will-change: transform;
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            /* Elevar sobre el cursor follower */
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            /* Mobile optimal */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            animation: slideUpFade 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUpFade {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .logo-placeholder {
+            width: clamp(80px, 25vw, 110px);
+            height: clamp(80px, 25vw, 110px);
+            border-radius: 50%;
+            background: linear-gradient(145deg, #1a1d24, #000000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                inset 0 1px 1px rgba(255, 255, 255, 0.05),
+                0 0 0 2px var(--accent-turquoise);
+            margin-bottom: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .logo-placeholder::after {
+            content: 'LOGO';
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+        }
+
+        /* For actual image placement later */
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .brand-title {
+            /* font-size inline now */
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: var(--text-main);
+            margin-bottom: 0.25rem;
+            transition: font-size 0.3s ease;
+        }
+
+        .brand-subtitle {
+            /* font-size inline now */
+            color: var(--accent-turquoise);
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: font-size 0.3s ease;
+        }
+
+        /* Redes Sociales Fila */
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 0.5rem;
+            width: 100%;
+            flex-wrap: wrap;
+            /* En caso de muchos íconos */
+        }
+
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: clamp(44px, 12vw, 54px);
+            height: clamp(44px, 12vw, 54px);
+            border-radius: 50%;
+            background: var(--btn-bg);
+            border: 2px solid transparent;
+            color: var(--text-main);
+            /* font-size inline now (via i tag) */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
+        }
+
+        .social-icon:hover,
+        .social-icon:active {
+            background: var(--btn-hover);
+            border-color: var(--accent-turquoise);
+            color: #ffffff;
+            transform: translateY(-4px);
+            box-shadow:
+                0 8px 15px rgba(0, 0, 0, 0.4),
+                0 0 12px var(--accent-turquoise-light);
+        }
+
+        .social-icon i {
+            transition: font-size 0.3s ease;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+            border-radius: 50%;
+        }
+
+        .social-icon:hover::before {
+            left: 150%;
+        }
+
+        .links-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            min-height: clamp(56px, 15vw, 64px);
+            padding: 1rem 1.5rem;
+            background: var(--btn-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 18px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 600;
+            /* font-size inline now */
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .link-button:hover,
+        .link-button:active {
+            transform: translateY(-4px);
+            background: var(--btn-hover);
+            border-color: var(--accent-turquoise);
+            box-shadow:
+                0 12px 25px rgba(0, 0, 0, 0.4),
+                0 0 15px var(--accent-turquoise-light);
+            color: #ffffff;
+        }
+
+        .link-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.03), transparent);
+            transform: skewX(-20deg);
+            transition: 0.5s;
+        }
+
+        .link-button:hover::before {
+            left: 150%;
+        }
+
+        .icon {
+            /* font-size scalable but generally relates to btn size */
+            color: var(--text-muted);
+            margin-right: 14px;
+            flex-shrink: 0;
+            transition: color 0.3s ease;
+        }
+
+        .link-button:hover .icon {
+            color: var(--accent-turquoise);
+        }
+
+        .link-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .link-title {
+            color: var(--text-main);
+        }
+
+        .link-button:hover .link-title {
+            color: #ffffff;
+        }
+
+        .single-line-content {
+            flex-grow: 0;
+        }
+
+        .footer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            text-align: center;
+            gap: 10px;
+            padding: 0 1rem;
+        }
+
+        .credit-link {
+            color: var(--accent-turquoise);
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .credit-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .admin-link {
+            color: var(--btn-bg);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .admin-link:hover {
+            color: var(--accent-turquoise);
+        }
+
+        .admin-link svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Elementos Antigravity Cursor -->
+    <div id="cursor-follower"></div>
+
+    <div class="container">
+        <!-- Logo and Brand Header -->
+        <header class="header-section">
+            <div class="logo-placeholder" id="logo-container">
+                <img id="logo-img" style="display: none;" src="" alt="Logo">
+            </div>
+            <h1 class="brand-title" id="page-title">MC Motors</h1>
+            <p class="brand-subtitle" id="page-subtitle">Servicios Automotrices</p>
+        </header>
+
+        <!-- Contenedor Dinámico de Redes Sociales (Fila) -->
+        <div class="social-row" id="dynamic-social-row">
+            <!-- Iconos sociales generados por JS -->
+        </div>
+
+        <!-- Contenedor Dinámico de Curriculum y Botones -->
+        <nav class="links-container" id="dynamic-links-container">
+            <!-- Los botones serán inyectados por JavaScript aquí. -->
+        </nav>
+
+        <footer class="footer">
+            <span id="footer-text">&copy; 2026 MC Motors</span>
+            <span id="footer-credit"></span>
+            <a href="login.html" class="admin-link" title="Admin">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 17a2 2 0 0 0 2-2c0-1.1-.9-2-2-2s-2 .9-2 2 .9 2 2 2zm6-9a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h1V6a5 5 0 0 1 10 0v2h1zm-6-5a3 3 0 0 0-3 3v2h6V6a3 3 0 0 0-3-3z" />
+                </svg>
+            </a>
+        </footer>
+    </div>
+
+    <!-- Lógica principal -->
+    <script>
+        // Configuración de animación Antigravity Cursor
+        const follower = document.getElementById('cursor-follower');
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let followerX = mouseX;
+        let followerY = mouseY;
+
+        // Esconder si estamos en móvil por la falta de hover util
+        const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+
+        if (!isTouchDevice) {
+            let cursorVisible = false;
+
+            document.addEventListener('mousemove', (e) => {
+                if (!cursorVisible) {
+                    follower.style.opacity = '1';
+                    cursorVisible = true;
+                    // Snap al lugar de primer toque en vez de arrastrar desde el centro
+                    followerX = e.clientX;
+                    followerY = e.clientY;
+                }
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Smooth trailing effect usando requestAnimationFrame para alto rendimiento
+            function animate() {
+                // Easing logic (lerp factor 0.1)
+                followerX += (mouseX - followerX) * 0.1;
+                followerY += (mouseY - followerY) * 0.1;
+                follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        } else {
+            // Ocultar en móviles
+            follower.style.display = 'none';
+        }
+
+        // Lógica de Renderizado del JSON
+        document.addEventListener('DOMContentLoaded', async () => {
+            const defaultData = {
+                titulo: "MC Motors",
+                subtitulo: "Servicios Automotrices",
+                tamanos: { tituloSize: 28, subtituloSize: 14, btnSize: 16, iconSize: 24 },
+                estetica: { color: "#00a19b", foto: "" },
+                sociales: [ // Ya es un array dinámico
+                    { id: "soc-1", tipo: "instagram", url: "https://instagram.com/mcmotors", icono: "fa-brands fa-instagram" },
+                    { id: "soc-2", tipo: "facebook", url: "https://facebook.com/mcmotors", icono: "fa-brands fa-facebook-f" },
+                    { id: "soc-3", tipo: "tiktok", url: "https://tiktok.com/@mcmotors", icono: "fa-brands fa-tiktok" }
+                ],
+                curriculum: { texto: "Perfil Profesional", url: "#", archivo: "" }, // Archivo en b64 nuevo
+                botones: [
+                    { id: "btn-1", texto: "Agendar Cita", url: "https://wa.me/593980703270", icono: "fa-brands fa-whatsapp" },
+                    { id: "btn-2", texto: "Nuestra Ubicación", url: "https://maps.app.goo.gl/69d6rmpJYoe81Kmo9", icono: "fa-solid fa-location-dot" }
+                ]
+            };
+
+            let data = null;
+            try {
+                // Agregar un timestamp para evitar cachear la respuesta cuando cambie la data
+                const response = await fetch('data.json?t=' + new Date().getTime());
+                if (response.ok) {
+                    data = await response.json();
+                } else {
+                    console.error("Error al cargar data.json:", response.status);
+                }
+            } catch (e) {
+                console.error("Excepción al cargar data.json:", e);
+            }
+
+            if (!data) {
+                data = defaultData;
+            }
+            if (!data.tamanos) { data.tamanos = defaultData.tamanos; }
+
+            // 1. Textos y Tamaños Inline
+            const titleEl = document.getElementById('page-title');
+            const subtitleEl = document.getElementById('page-subtitle');
+
+            titleEl.innerText = data.titulo || "MC Motors";
+            subtitleEl.innerText = data.subtitulo || "Servicios Automotrices";
+
+            titleEl.style.fontSize = `${data.tamanos.tituloSize}px`;
+            subtitleEl.style.fontSize = `${data.tamanos.subtituloSize}px`;
+
+            // 5. Footer & Créditos
+            const footerTextEl = document.getElementById('footer-text');
+            const footerCreditEl = document.getElementById('footer-credit');
+
+            const baseText = (data.footer && data.footer.texto !== undefined) ? data.footer.texto : `© 2026 ${data.titulo || "MC Motors"}`;
+            footerTextEl.innerText = baseText;
+
+            if (data.footer && data.footer.credito && data.footer.url) {
+                footerCreditEl.innerHTML = `<a href="${data.footer.url}" target="_blank" rel="noopener noreferrer" class="credit-link">${data.footer.credito}</a>`;
+            } else if (!data.footer) {
+                // Fallback a defecto si no existe el bloque en versiones viejas
+                footerCreditEl.innerHTML = `<a href="https://wa.me/593984083776?text=Hola%20T_LEVA,%20vi%20tu%20trabajo%20en%20el%20sitio%20de%20MC%20Motors." target="_blank" rel="noopener noreferrer" class="credit-link">diseño T_LEVA</a>`;
+            } else {
+                footerCreditEl.innerHTML = ''; // Si lo borraron explícitamente en Dashboard
+            }
+
+            // 2. Estética
+            if (data.estetica) {
+                if (data.estetica.color) {
+                    document.documentElement.style.setProperty('--accent-turquoise', data.estetica.color);
+                    document.documentElement.style.setProperty('--accent-turquoise-hover', data.estetica.color);
+                    try {
+                        const hex = data.estetica.color.replace('#', '');
+                        const r = parseInt(hex.substring(0, 2), 16);
+                        const g = parseInt(hex.substring(2, 4), 16);
+                        const b = parseInt(hex.substring(4, 6), 16);
+                        document.documentElement.style.setProperty('--accent-turquoise-light', `rgba(${r}, ${g}, ${b}, 0.15)`);
+                    } catch (e) { }
+                }
+                if (data.estetica.foto && data.estetica.foto.trim() !== '') {
+                    const img = document.getElementById('logo-img');
+                    img.src = data.estetica.foto;
+                    img.style.display = 'block';
+                }
+            }
+
+            // 3. Redes Sociales
+            const socialRow = document.getElementById('dynamic-social-row');
+            socialRow.innerHTML = '';
+            if (data.sociales && Array.isArray(data.sociales)) {
+                data.sociales.forEach(red => {
+                    if (!red.url) return;
+                    const a = document.createElement('a');
+                    a.href = red.url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.className = "social-icon";
+                    // Aplicar tamaño a fontawesome icon inside
+                    a.innerHTML = `<i class="${red.icono}" style="font-size: ${data.tamanos.iconSize}px;"></i>`;
+                    socialRow.appendChild(a);
+                });
+            }
+
+            // 4. Botones
+            const container = document.getElementById('dynamic-links-container');
+            container.innerHTML = '';
+
+            // Resume
+            if ((data.curriculum && data.curriculum.url && data.curriculum.url !== "#" && data.curriculum.url !== "") || (data.curriculum && data.curriculum.archivo && data.curriculum.archivo !== "")) {
+                const cvA = document.createElement('a');
+                // Target file base64 first, then fall back to url link
+                cvA.href = (data.curriculum.archivo && data.curriculum.archivo !== "") ? data.curriculum.archivo : data.curriculum.url;
+
+                // If it is base64 file, add a download attribute
+                if (cvA.href.startsWith('data:')) {
+                    cvA.download = "Curriculum_MC_Motors.pdf";
+                } else {
+                    cvA.target = "_blank";
+                    cvA.rel = "noopener noreferrer";
+                }
+
+                cvA.className = "link-button";
+                cvA.style.fontSize = `${data.tamanos.btnSize}px`;
+                cvA.innerHTML = `
+                    <i class="fa-solid fa-file-pdf icon" style="font-size: ${data.tamanos.btnSize * 1.2}px;"></i>
+                    <div class="link-content single-line-content">
+                        <span class="link-title">${data.curriculum.texto || 'Perfil Profesional'}</span>
+                    </div>
+                `;
+                container.appendChild(cvA);
+            }
+
+            // Normales
+            if (data.botones && Array.isArray(data.botones)) {
+                data.botones.forEach(btn => {
+                    if (!btn.texto || !btn.url) return;
+
+                    const a = document.createElement('a');
+                    a.href = btn.url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.className = "link-button";
+                    a.style.fontSize = `${data.tamanos.btnSize}px`;
+
+                    const iconClass = btn.icono ? btn.icono : "fa-solid fa-arrow-up-right-from-square";
+                    a.innerHTML = `
+                        <i class="${iconClass} icon" style="font-size: ${data.tamanos.btnSize * 1.2}px;"></i>
+                        <div class="link-content single-line-content">
+                            <span class="link-title">${btn.texto}</span>
+                        </div>
+                    `;
+                    container.appendChild(a);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

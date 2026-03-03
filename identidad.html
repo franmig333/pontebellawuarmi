@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Marca Interactivo | MC Motors</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .cian-text {
+            color: #00a19b;
+        }
+
+        .cian-bg {
+            background-color: #00a19b;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-btn.active {
+            background-color: #00a19b;
+            color: black;
+            box-shadow: 0 0 20px rgba(0, 161, 155, 0.4);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-[#00a19b] selection:text-white">
+
+    <!-- Header Principal -->
+    <header
+        class="relative py-20 px-6 border-b border-white/5 bg-black overflow-hidden flex flex-col items-center text-center">
+        <div
+            class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]">
+        </div>
+        <div class="relative z-10 mb-8">
+            <img src="./logo_mc.png" alt="MC Motors Logo" class="h-32 md:h-40 object-contain mx-auto"
+                onerror="this.src='https://via.placeholder.com/300x100?text=Logo+MC+Motors'">
+        </div>
+        <h1 class="text-xs tracking-[1em] text-neutral-500 uppercase mb-2 font-black italic">Manual de Identidad Visual
+        </h1>
+        <p class="text-2xl md:text-4xl font-light tracking-tight">IDENTIDAD <span
+                class="cian-text font-black italic">ORIGINAL</span></p>
+    </header>
+
+    <!-- Navegación por Botones (Tabs) -->
+    <nav class="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-white/5 shadow-2xl">
+        <div class="max-w-4xl mx-auto flex justify-around p-3">
+            <button onclick="showTab('logo', this)"
+                class="nav-btn active flex items-center gap-2 px-6 py-2 rounded-full transition-all text-sm font-black uppercase tracking-widest text-neutral-400">
+                <i class="fa-solid fa-bullseye"></i> <span class="hidden sm:inline">El Logo</span>
+            </button>
+            <button onclick="showTab('colors', this)"
+                class="nav-btn flex items-center gap-2 px-6 py-2 rounded-full transition-all text-sm font-black uppercase tracking-widest text-neutral-400">
+                <i class="fa-solid fa-palette"></i> <span class="hidden sm:inline">Cromática</span>
+            </button>
+            <button onclick="showTab('stationery', this)"
+                class="nav-btn flex items-center gap-2 px-6 py-2 rounded-full transition-all text-sm font-black uppercase tracking-widest text-neutral-400">
+                <i class="fa-solid fa-layer-group"></i> <span class="hidden sm:inline">Papelería</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-16 px-6">
+
+        <!-- PESTAÑA 1: EL LOGO Y ESLÓGAN -->
+        <div id="logo" class="tab-content active space-y-24">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 text-center lg:text-left">
+                    <div
+                        class="inline-block cian-bg text-black px-4 py-1 text-xs font-black uppercase tracking-widest italic">
+                        Activo Maestro</div>
+                    <h2 class="text-6xl font-black italic tracking-tighter uppercase leading-none">El <br><span
+                            class="cian-text">Símbolo</span></h2>
+                    <p class="text-neutral-400 text-xl font-light leading-relaxed">
+                        La marca <span class="text-white font-bold italic uppercase">Mc Motors</span> proyecta alto
+                        rendimiento. Las barras inclinadas simbolizan el avance tecnológico y la eficiencia industrial.
+                    </p>
+                    <div class="p-6 glass rounded-2xl flex gap-6 items-center text-left">
+                        <i class="fa-solid fa-gauge-high cian-text text-3xl"></i>
+                        <div>
+                            <p class="font-bold uppercase italic tracking-tighter">Cinética Visual</p>
+                            <p class="text-neutral-500 text-sm">Inclinación de 25° que representa la velocidad de
+                                respuesta técnica.</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="p-12 bg-black rounded-[40px] border border-white/10 flex items-center justify-center shadow-2xl relative overflow-hidden min-h-[350px]">
+                    <img src="./logo_mc.png" alt="Logo Principal"
+                        class="h-36 object-contain relative z-10 transition-transform hover:scale-110 duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#00a19b]/10 to-transparent"></div>
+                </div>
+            </div>
+
+            <!-- Filosofía del Eslogan -->
+            <div class="pt-16 border-t border-white/5">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-black italic tracking-tighter uppercase mb-2">Filosofía del <span
+                            class="cian-text">Eslógan</span></h2>
+                    <p class="cian-text text-sm font-bold tracking-[0.4em] uppercase italic">"Calidad, Precisión y
+                        Confianza Total"</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="p-10 glass rounded-[30px] hover:border-[#00a19b]/30 transition-all text-center">
+                        <i class="fa-solid fa-award cian-text text-3xl mb-6"></i>
+                        <h3 class="text-2xl font-black italic uppercase mb-4">Calidad</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Compromiso con la excelencia técnica y el
+                            uso de componentes de alto rendimiento.</p>
+                    </div>
+                    <div class="p-10 glass rounded-[30px] hover:border-[#00a19b]/30 transition-all text-center">
+                        <i class="fa-solid fa-microchip cian-text text-3xl mb-6"></i>
+                        <h3 class="text-2xl font-black italic uppercase mb-4">Precisión</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Rigor absoluto en el diagnóstico
+                            computarizado y procesos mecánicos exactos.</p>
+                    </div>
+                    <div class="p-10 glass rounded-[30px] hover:border-[#00a19b]/30 transition-all text-center">
+                        <i class="fa-solid fa-shield-halved cian-text text-3xl mb-6"></i>
+                        <h3 class="text-2xl font-black italic uppercase mb-4">Confianza</h3>
+                        <p class="text-neutral-500 text-sm leading-relaxed">Transparencia total para garantizar la
+                            seguridad del cliente y su patrimonio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA 2: CROMÁTICA -->
+        <div id="colors" class="tab-content space-y-16">
+            <div class="text-center">
+                <h2 class="text-4xl font-black italic uppercase tracking-tighter">ADN <span
+                        class="cian-text">Cromático</span></h2>
+                <p class="text-neutral-500 text-xs tracking-[0.4em] font-bold mt-2 uppercase">Ingeniería del Color</p>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+                <div class="group">
+                    <div class="aspect-square rounded-3xl mb-4 shadow-xl border border-white/10 transition-transform group-hover:scale-105"
+                        style="background-color: #00a19b;"></div>
+                    <h4 class="font-black text-sm uppercase italic">Cian Marca</h4>
+                    <code class="text-xs cian-text font-bold uppercase">#00A19B</code>
+                </div>
+                <div class="group">
+                    <div class="aspect-square rounded-3xl mb-4 shadow-xl border border-white/10 transition-transform group-hover:scale-105"
+                        style="background-color: #c8cccd;"></div>
+                    <h4 class="font-black text-sm uppercase italic">Gris Plata</h4>
+                    <code class="text-xs cian-text font-bold uppercase">#C8CCCD</code>
+                </div>
+                <div class="group">
+                    <div class="aspect-square rounded-3xl mb-4 shadow-xl border border-white/10 transition-transform group-hover:scale-105"
+                        style="background-color: #566065;"></div>
+                    <h4 class="font-black text-sm uppercase italic">Gris Acero</h4>
+                    <code class="text-xs cian-text font-bold uppercase">#566065</code>
+                </div>
+                <div class="group">
+                    <div class="aspect-square rounded-3xl mb-4 shadow-xl border border-white/10 transition-transform group-hover:scale-105"
+                        style="background-color: #231f20;"></div>
+                    <h4 class="font-black text-sm uppercase italic">Negro Fondo</h4>
+                    <code class="text-xs cian-text font-bold uppercase">#231F20</code>
+                </div>
+                <div class="group">
+                    <div class="aspect-square rounded-3xl mb-4 shadow-xl border border-white/10 transition-transform group-hover:scale-105"
+                        style="background-color: #000000;"></div>
+                    <h4 class="font-black text-sm uppercase italic">Negro Puro</h4>
+                    <code class="text-xs cian-text font-bold uppercase">#000000</code>
+                </div>
+            </div>
+        </div>
+
+        <!-- PESTAÑA 3: PAPELERÍA -->
+        <div id="stationery" class="tab-content space-y-16">
+            <h2 class="text-4xl font-black italic uppercase tracking-tighter text-center">Business <span
+                    class="cian-text">Card</span> Design</h2>
+            <div class="flex flex-col xl:flex-row items-center justify-center gap-12">
+                <!-- Tarjeta Frente -->
+                <div
+                    class="w-[450px] h-[250px] bg-[#111] rounded-[24px] shadow-2xl border border-white/5 relative overflow-hidden flex items-center justify-center group">
+                    <div class="absolute left-0 top-0 w-3 h-full cian-bg"></div>
+                    <img src="./logo_mc.png" alt="Logo Card"
+                        class="h-20 object-contain transition-transform group-hover:scale-110 duration-500">
+                </div>
+                <!-- Tarjeta Reverso -->
+                <div
+                    class="w-[450px] h-[250px] bg-[#231f20] rounded-[24px] p-10 shadow-2xl border border-white/5 relative overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10">
+                    </div>
+                    <div class="flex h-full gap-6 relative z-10 items-center">
+                        <div class="flex-1 space-y-4">
+                            <div>
+                                <h3 class="text-3xl font-black uppercase italic leading-none">Carlos Méndez</h3>
+                                <p class="cian-text text-[10px] font-black uppercase tracking-widest">Gerente
+                                    Propietario</p>
+                            </div>
+                            <div class="text-[10px] space-y-1 font-bold text-neutral-400 uppercase tracking-wider">
+                                <p><i class="fa-solid fa-phone cian-text mr-2"></i> 098 070 3270</p>
+                                <p><i class="fa-solid fa-location-dot cian-text mr-2"></i> Benigno Palacios y Av.
+                                    Américas</p>
+                                <p><i class="fa-solid fa-envelope cian-text mr-2"></i> mcmotors.cuenca@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="w-24 h-24 bg-white p-2 rounded-xl flex items-center justify-center">
+                            <div
+                                class="w-full h-full bg-black flex items-center justify-center text-[8px] font-black cian-text border border-dashed border-[#00a19b]">
+                                QR CODE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Industrial -->
+    <footer class="py-20 px-6 text-center border-t border-white/5 bg-black">
+        <img src="./logo_mc.png" alt="Logo Footer"
+            class="h-12 mx-auto mb-8 opacity-40 grayscale hover:grayscale-0 transition-all">
+        <p class="text-neutral-700 text-[10px] tracking-[0.4em] uppercase font-bold">
+            © 2026 MC MOTORS · Cuenca, Ecuador · Identidad por Franmig333
+        </p>
+        <a href="./index.html"
+            class="inline-block mt-8 text-xs text-neutral-500 hover:text-[#00a19b] transition-colors border-b border-neutral-800 hover:border-[#00a19b] pb-1 uppercase font-black tracking-widest italic">Volver
+            al Bio-site</a>
+    </footer>
+
+    <script>
+        function showTab(tabId, btn) {
+            // Ocultar todos los contenidos
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Desactivar todos los botones
+            document.querySelectorAll('.nav-btn').forEach(button => {
+                button.classList.remove('active');
+            });
+            // Mostrar el seleccionado
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+            // Scroll suave arriba
+            window.scrollTo({ top: 250, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+
+</html>

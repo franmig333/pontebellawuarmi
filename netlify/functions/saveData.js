@@ -1,21 +1,21 @@
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Método no permitido' };
   }
 
   try {
     const data = JSON.parse(event.body);
-    
+
     // Obtener variables de entorno configuradas en Netlify
     const token = process.env.GITHUB_TOKEN;
     const owner = process.env.GITHUB_OWNER || 'franmig333';
-    const repo = process.env.GITHUB_REPO || 'bio-site-mc';
+    const repo = process.env.GITHUB_REPO || 'pontebellawuarmi';
     const path = 'data.json';
-    
+
     if (!token) {
-      return { 
-        statusCode: 500, 
-        body: JSON.stringify({ error: 'GITHUB_TOKEN no está configurado en Netlify' }) 
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: 'GITHUB_TOKEN no está configurado en Netlify' })
       };
     }
 
@@ -61,12 +61,12 @@ exports.handler = async function(event, context) {
     });
 
     if (!putRes.ok) {
-        const errorText = await putRes.text();
-        console.error("Error de la API de GitHub:", errorText);
-        return { 
-          statusCode: putRes.status, 
-          body: JSON.stringify({ error: 'Fallo al guardar en GitHub', details: errorText }) 
-        };
+      const errorText = await putRes.text();
+      console.error("Error de la API de GitHub:", errorText);
+      return {
+        statusCode: putRes.status,
+        body: JSON.stringify({ error: 'Fallo al guardar en GitHub', details: errorText })
+      };
     }
 
     return {

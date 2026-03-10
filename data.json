@@ -1,6 +1,6 @@
 {
-  "titulo": "Ponte",
-  "subtitulo": "Calidad, Presición y Confianza Total",
+  "titulo": "Ponte Bella Wuarmi",
+  "subtitulo": "Belleza sin limites",
   "tamanos": {
     "tituloSize": 28,
     "subtituloSize": 11,
@@ -32,7 +32,7 @@
     }
   ],
   "curriculum": {
-    "texto": "Perfil Profesional",
+    "texto": "Catálogo",
     "url": "https://mcmotors.netlify.app/perfil.pdf",
     "archivo": ""
   },
@@ -40,14 +40,14 @@
     {
       "id": "btn-identidad",
       "icono": "fa-solid fa-fingerprint",
-      "texto": "IDENTIDAD DE MARCA",
+      "texto": "Conócenos",
       "url": "https://mcmotors.netlify.app/identidad.html"
     },
     {
       "id": "btn-1",
       "icono": "fa-brands fa-whatsapp",
       "texto": "Agendar Cita",
-      "url": "https://wa.me/593980703270"
+      "url": "https://wa.me/593997162703"
     },
     {
       "id": "btn-2",
@@ -57,7 +57,7 @@
     }
   ],
   "footer": {
-    "texto": "MC Motors 2026.",
+    "texto": "Ponte Bella Wuarmi.",
     "credito": "Diseño T-LEVA",
     "url": "https://wa.me/593984083776?text=Hola%20T_LEVA,%20vi%20tu%20trabajo%20en%20el%20sitio%20de%20MC%20Motors."
   }

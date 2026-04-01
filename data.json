@@ -32,7 +32,7 @@
     }
   ],
   "curriculum": {
-    "texto": "Post",
+    "texto": "Videos",
     "url": "https://drive.google.com/file/d/1916q0H-TIa3xwp7-D3qBapCHJkIRERFo/view?usp=sharing",
     "archivo": ""
   },
@@ -40,8 +40,8 @@
     {
       "id": "btn-identidad",
       "icono": "fa-solid fa-fingerprint",
-      "texto": "Conócenos",
-      "url": "https://mcmotors.netlify.app/identidad.html"
+      "texto": "Información",
+      "url": "https://wa.me/593997162103"
     },
     {
       "id": "btn-1",
